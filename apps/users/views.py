@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.generics import CreateAPIView
@@ -60,6 +62,7 @@ class LoginAPIView(APIView):
 
 class ConfirmAPIView(APIView):
     serializer_class = ConfirmSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
