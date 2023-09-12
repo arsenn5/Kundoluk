@@ -31,7 +31,7 @@ class RegisterAPIView(CreateAPIView):
         serializer.save()
 
 
-class LoginAPIView(APIView):
+class LoginAPIView(CreateAPIView):
     serializer_class = LoginSerializer
     permission_classes = [AllowAny]
 
@@ -58,7 +58,7 @@ class LoginAPIView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
-class ConfirmAPIView(APIView):
+class ConfirmAPIView(CreateAPIView):
     serializer_class = ConfirmSerializer
     permission_classes = [AllowAny]
 

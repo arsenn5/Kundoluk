@@ -27,20 +27,34 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-
-INSTALLED_APPS = [
-    'jazzmin',
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework_simplejwt',
+]
+
+THEME_APPS = ['jazzmin']
+
+LIBRARY_APPS = [
     'rest_framework',
+    'rest_framework_simplejwt',
+    'django_filters',
+    'drf_yasg',
+]
+
+LOCAL_APPS = [
     'apps.users',
     'apps.lessons',
-    'drf_yasg'
+]
+
+INSTALLED_APPS = [
+    *THEME_APPS,
+    *DJANGO_APPS,
+    *LOCAL_APPS,
+    *LIBRARY_APPS
 ]
 
 MIDDLEWARE = [
@@ -146,7 +160,6 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
-
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

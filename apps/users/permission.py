@@ -20,3 +20,11 @@ class IsElderPermission(BasePermission):
         except Exception:
             raise PermissionDenied
         return bool(request.user and request.user.is_elder)
+
+
+class IsStudentOrElderPermission(BasePermission):
+    def has_permission(self, request, view):
+        # Проверяем, что пользователь аутентифицирован
+        if request.user.is_authenticated:
+            return request.user.is_elder or request.user.is_student
+        return False
