@@ -1,9 +1,9 @@
 from django.urls import path
 
-from apps.lessons.views import LessonAPIView, LessonCreateAPIView, LessonDetailAPIView
+from apps.lessons.views import ScheduleAPIView, ScheduleCreateAPIView, ScheduleDetailAPIView
 
 urlpatterns = [
-    path('lesson/', LessonAPIView.as_view(), name='list_lesson'),
-    path('lesson/<int:id>/', LessonDetailAPIView.as_view(), name='list_lesson'),
-    path('lesson/create/', LessonCreateAPIView.as_view(), name='list_lesson')
+    path('lesson/', ScheduleAPIView.as_view(), name='list_lesson'),
+    path('lesson/<int:id>/', ScheduleDetailAPIView.as_view(), name='list_lesson'),
+    path('lesson/create/', ScheduleCreateAPIView.as_view(), name='list_lesson')
 ]

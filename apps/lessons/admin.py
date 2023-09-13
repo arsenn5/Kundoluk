@@ -1,7 +1,11 @@
 from django.contrib import admin
-from apps.lessons.models import Schedule, Lesson
+from .models import Lesson, Schedule
 
-# Register your models here.
+@admin.register(Lesson)
+class LessonAdmin(admin.ModelAdmin):
+    list_display = ['name', 'lesson_time']
 
-admin.site.register(Schedule)
-admin.site.register(Lesson)
+
+@admin.register(Schedule)
+class ScheduleAdmin(admin.ModelAdmin):
+    list_display = ['lesson', 'homework', 'date']

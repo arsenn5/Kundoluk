@@ -23,8 +23,8 @@ from Kundoluk.settings import swagger
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/users/', include('apps.users.urls')),
-    path('api/v1/object/', include('apps.lessons.urls'))
+    path('api/users/', include('apps.users.urls')),
+    path('api/object/', include('apps.lessons.urls'))
 ]
 urlpatterns += swagger.urlpatterns
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
