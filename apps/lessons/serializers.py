@@ -19,16 +19,16 @@ class ScheduleSerializer(serializers.ModelSerializer):
 
 
 class ScheduleDetailSerializer(serializers.ModelSerializer):
-    lesson = LessonSerializer()
+    # lesson = LessonSerializer()
 
     class Meta:
         model = Schedule
         fields = "__all__"
-        # read_only_fields = ['training_class', 'user']
+        read_only_fields = ['training_class', 'user']
 
 
 class DateSerializer(serializers.ModelSerializer):
-    # lesson = ScheduleSerializer(many=True)
+    lesson = ScheduleSerializer(many=True)
     date = serializers.DateField(validators=[UniqueValidator(queryset=Date.objects.all())])
 
     class Meta:

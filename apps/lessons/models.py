@@ -10,7 +10,7 @@ class Lesson(models.Model):
     lesson_time = models.CharField(max_length=100, choices=TIMESLOTS_LESSON, verbose_name='Время уроков')
 
     def __str__(self):
-        return f'предмет: {self.name} время урока: {self.lesson_time} ---'
+        return f'предмет: {self.name} - время урока: {self.lesson_time}'
 
     class Meta:
         verbose_name = 'Урок'
@@ -18,6 +18,8 @@ class Lesson(models.Model):
 
 
 class Schedule(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    training_class = models.CharField(choices=CLASS_CHOICES, null=True, max_length=100, verbose_name='Класс')
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='Расписание')
     homework = models.TextField(max_length=200, verbose_name='Домашнее задание')
     photo = models.ImageField(verbose_name='Фотография')
