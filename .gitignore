@@ -2,13 +2,13 @@
 **/migrations/*__pycache__
 !*/media/!*/photos/*/
 */__pycache__/
-<<<<<<< HEAD
 __pycache__/
 db.sqlite3
 =======
 .env
 venv
 .idea
+.idea/
 static
 
 media
