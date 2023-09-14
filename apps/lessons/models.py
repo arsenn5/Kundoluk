@@ -1,5 +1,7 @@
 from django.db import models
 from apps.lessons.constans import TIMESLOTS_LESSON  # DAYS_OF_WEEK
+from apps.users.constants import CLASS_CHOICES
+from apps.users.models import User
 
 
 class Lesson(models.Model):
@@ -8,7 +10,7 @@ class Lesson(models.Model):
     lesson_time = models.CharField(max_length=100, choices=TIMESLOTS_LESSON, verbose_name='Время уроков')
 
     def __str__(self):
-        return f'{self.name}, {self.date}'
+        return f'предмет: {self.name} время урока: {self.lesson_time} ---'
 
     class Meta:
         verbose_name = 'Урок'
@@ -23,8 +25,24 @@ class Schedule(models.Model):
     date = models.DateField(verbose_name='Дата')
 
     def __str__(self):
-        return str(self.lesson)
+        return f'{str(self.lesson)} Дата : {self.date}'
 
     class Meta:
         verbose_name = 'Расписание'
         verbose_name_plural = 'Расписания'
+
+
+class Date(models.Model):
+    date = models.DateField(verbose_name='Дата')
+    lesson = models.ManyToManyField(Schedule, verbose_name='Урок', related_name='dates')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    training_class = models.CharField(choices=CLASS_CHOICES, null=True, max_length=100, verbose_name='Класс')
+
+    # training_class = models.CharField(choices=CLASS_CHOICES, null=True, max_length=100, verbose_name='Класс')
+
+    def __str__(self):
+        return str(self.date)
+
+    class Meta:
+        verbose_name = 'Дата'
+        verbose_name_plural = 'Даты'

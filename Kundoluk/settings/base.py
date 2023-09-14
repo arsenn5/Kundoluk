@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-&fj9*)e(_q(kz9af+zsjlj0o7i(vg!+f7amk%=%+2lspvyt@9j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 # Application definition
 DJANGO_APPS = [
@@ -100,7 +100,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
@@ -176,5 +175,19 @@ EMAIL_HOST_PASSWORD = 'mijzenzgzozrefdf'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+    "http://localhost:3080",
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:4040",
+    "https://15e4-109-201-165-30.ngrok-free.app",
+]
+
+CSRF_TRUSTED_ORIGINS = ["https://15e4-109-201-165-30.ngrok-free.app"]
+
+ALLOWED_HOSTS = ['*'] + CORS_ALLOWED_ORIGINS
 
 from Kundoluk.settings.jazzmin import *
