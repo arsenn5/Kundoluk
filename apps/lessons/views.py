@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, RetrieveAPIView
 
-from apps.lessons.models import Schedule, Date
-from apps.lessons.serializers import ScheduleSerializer, ScheduleDetailSerializer, DateSerializer
+from apps.lessons.models import Schedule
+from apps.lessons.serializers import ScheduleSerializer, ScheduleDetailSerializer
 from apps.users.permission import IsElderPermission, IsStudentPermission, IsStudentOrElderPermission
 from apps.lessons.filters import ScheduleFilter
 
@@ -27,7 +27,7 @@ class ScheduleCreateAPIView(CreateAPIView):
 
 
 class ScheduleAPIView(ListAPIView):
-    serializer_class = DateSerializer
+    serializer_class = ScheduleSerializer
     permission_classes = [IsStudentOrElderPermission]
     filter_backends = [DjangoFilterBackend]
     filterset_class = ScheduleFilter
@@ -37,19 +37,7 @@ class ScheduleAPIView(ListAPIView):
 
         user_class = user.training_class
 
-        queryset = Date.objects.filter(training_class=user_class)
+        queryset = Schedule.objects.filter(training_class=user_class)
 
         return queryset
-
-
-class ScheduleListAPIView(CreateAPIView):
-    queryset = Date.objects.all()
-    serializer_class = DateSerializer
-    permission_classes = [IsElderPermission]
-
-    def perform_create(self, serializer):
-        user_class = self.request.user.training_class
-        user = self.request.user
-
-        serializer.save(training_class=user_class, user=user)
 

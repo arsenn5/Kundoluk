@@ -33,18 +33,3 @@ class Schedule(models.Model):
         verbose_name = 'Расписание'
         verbose_name_plural = 'Расписания'
 
-
-class Date(models.Model):
-    date = models.DateField(verbose_name='Дата')
-    lesson = models.ManyToManyField(Schedule, verbose_name='Урок', related_name='dates')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    training_class = models.CharField(choices=CLASS_CHOICES, null=True, max_length=100, verbose_name='Класс')
-
-    # training_class = models.CharField(choices=CLASS_CHOICES, null=True, max_length=100, verbose_name='Класс')
-
-    def __str__(self):
-        return str(self.date)
-
-    class Meta:
-        verbose_name = 'Дата'
-        verbose_name_plural = 'Даты'

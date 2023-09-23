@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from rest_framework import status
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView, UpdateAPIView, ListAPIView, get_object_or_404
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
@@ -8,7 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
 from apps.users.emails import send_email_confirm
 from apps.users.models import User
-from apps.users.serializers import RegisterSerializer, LoginSerializer, ConfirmSerializer
+from apps.users.serializers import RegisterSerializer, LoginSerializer, ConfirmSerializer, ProfileSerializer
 
 
 class RegisterAPIView(CreateAPIView):
@@ -79,3 +79,11 @@ class ConfirmAPIView(CreateAPIView):
         user.save()
 
         return Response({'message': 'Аккаунт успешно подтвержден.'}, status=200)
+
+
+class ProfileAPIView(RetrieveUpdateAPIView):
+    serializer_class = ProfileSerializer
+    permission_class = (IsAuthenticated,)
+
+    def get_object(self):
+        return get_object_or_404(User, id=self.request.user.id)

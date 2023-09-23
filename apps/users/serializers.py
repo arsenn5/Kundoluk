@@ -31,3 +31,10 @@ class LoginSerializer(serializers.Serializer):
 class ConfirmSerializer(serializers.Serializer):
     email = serializers.EmailField()
     code = serializers.CharField(max_length=6)
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'profile_photo', 'surname', 'email', 'school', 'training_class']
+        read_only_fields = ['email', 'training_class']
